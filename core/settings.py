@@ -50,6 +50,7 @@ CUSTOM_APPS = [
     "apps.main",
     "apps.product",
     "apps.user",
+    'apps.news'
 ]
 
 THIRD_PARTY_APPS = [
