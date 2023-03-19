@@ -1,20 +1,17 @@
-from rest_framework.generics import (
-    CreateAPIView
-)
+from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 
-from .serializers import (
-    RegisterSerializer, LoginSerializer,
-)
+from .serializers import LoginSerializer, RegisterSerializer
+
 
 class RegisterAPIView(CreateAPIView):
     serializer_class = RegisterSerializer
-    permission_classes = (AllowAny,) 
+    permission_classes = (AllowAny,)
 
 
-class LoginAPIView(CreateAPIView): 
+class LoginAPIView(CreateAPIView):
     serializer_class = LoginSerializer
-    permission_classes = (AllowAny,) 
+    permission_classes = (AllowAny,)
 
     def perform_create(self, serializer):
         pass
