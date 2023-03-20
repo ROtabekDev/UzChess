@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 from apps.user.models import User
@@ -10,7 +11,7 @@ class Article(BaseModel):
     title = models.CharField("Sarlavhasi", max_length=250)
     slug = models.SlugField("Slugi", max_length=250)
     slider = models.ImageField("Rasm", upload_to="blog/blog/slider/")
-    content = models.TextField()
+    content = RichTextUploadingField()
 
     def __str__(self):
         return self.title
