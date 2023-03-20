@@ -1,6 +1,8 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import RegexValidator
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -64,3 +66,19 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         refresh = RefreshToken.for_user(self)
 
         return {"refresh": str(refresh), "access": str(refresh.access_token)}
+
+
+class SavedItem(BaseModel):
+    """Saqlab qo`yilgan narsalar uchun model"""
+
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey("content_type", "object_id")
+
+    def __str__(self):
+        return self.user_id.phone_number
+
+    class Meta:
+        verbose_name = "Saqlagan narsa"
+        verbose_name_plural = "Saqlagan narsalar"

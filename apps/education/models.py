@@ -24,12 +24,6 @@ class CategoryForCourse(BaseModel):
 class Course(BaseModel):
     """Kurs uchun modeli"""
 
-    COURSE_TYPE = (
-        ("Bestseller", "Ko`p sotilgan"),
-        ("Recommended", "Tavsiya etiladi"),
-        ("Nothing", "Oddiy"),
-    )
-
     title = models.CharField("Kurs nomi", max_length=150)
     slug = models.SlugField("Slugi", max_length=150)
     author_id = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name="Muallif")
