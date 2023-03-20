@@ -46,14 +46,18 @@ class Course(BaseModel):
         verbose_name_plural = "Kurslar"
 
 
+class SectioType(models.TextChoices):
+    Not_seen = "Not_seen", "Ko`rilmagan"
+    In_progress = "In_progress", "Jarayonda"
+    Reviewed = "Reviewed", "Ko`rilgan"
+
+
 class Section(BaseModel):
     """Bo`limlar uchun model"""
 
-    SECTION_TYPE = (("Not seen", "Ko`rilmagan"), ("In progress", "Jarayonda"), ("Reviewed", "Ko`rilgan"))
-
     title = models.CharField("Sarlavhasi", max_length=150)
     order = models.PositiveIntegerField("Tartib nomeri", default=1)
-    section_type = models.CharField("Bo`lim turi", choices=SECTION_TYPE, default="Not seen", max_length=20)
+    section_type = models.CharField("Bo`lim turi", choices=SectioType.choices, default="Not seen", max_length=20)
     is_public = models.BooleanField(default=False)
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
 

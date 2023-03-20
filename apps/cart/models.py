@@ -64,26 +64,34 @@ class CartProduct(BaseModel):
         verbose_name_plural = "Savatdagi mahsulotlar"
 
 
+class BuyigType(models.TextChoices):
+    Self = "Self", "O`zim olib ketaman"
+    Delivery = "Delivery", "Yetkazib berish"
+
+
+class OrderStatus(models.TextChoices):
+    New = "New", "Yangi"
+    In_progress = "In_progress", "Jarayoda"
+    Error = "Error", "Xatolik"
+    Completed = "Completed", "Bajarildi"
+
+
 class Order(BaseModel):
     """Buyurtmalar uchun model"""
-
-    BUYING_TYPE = (("Self", "O`zim olib ketaman"), ("Delivery", "Yetkazib berish"))
-
-    ORDER_STATUS = (("New", "Yangi"), ("In_progress", "Jarayoda"), ("Error", "Xatolik"), ("Completed", "Bajarildi"))
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
     cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
     first_name = models.CharField("Ismi", max_length=150)
     last_name = models.CharField("Familiya", max_length=150)
     phone_number = PhoneNumberField("Telefon nomer", max_length=32)
-    buying_type = models.CharField("Yetkazib berish turi", choices=BUYING_TYPE, max_length=20)
+    buying_type = models.CharField("Yetkazib berish turi", choices=BuyigType.choices, max_length=20)
     region_id = models.ForeignKey("Region", on_delete=models.SET_NULL, null=True, blank=True)
     district_id = models.ForeignKey("District", on_delete=models.SET_NULL, null=True, blank=True)
     home_address = models.CharField("Uy manzili", max_length=250)
     text = models.TextField("Xabar")
     payment_type = models.ForeignKey("PaymentType", on_delete=models.SET_NULL, null=True, blank=True)
     order_number = models.PositiveBigIntegerField("Buyurtma raqami", unique=True)
-    status = models.CharField("Buyurtma holati", choices="", max_length=20)
+    status = models.CharField("Buyurtma holati", choices=OrderStatus.choices, max_length=20)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.phone_number}"
