@@ -9,12 +9,13 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from datetime import timedelta
 from os import getenv
 from pathlib import Path
 
 from dotenv import load_dotenv
+
+from core.jazzmin import *
 
 load_dotenv()
 
@@ -37,6 +38,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 DJANGO_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,14 +46,7 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-CUSTOM_APPS = [
-    "apps.cart",
-    "apps.education",
-    "apps.main",
-    "apps.product",
-    "apps.user",
-    'apps.news'
-]
+CUSTOM_APPS = ["apps.cart", "apps.education", "apps.main", "apps.product", "apps.user", "apps.news"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
@@ -64,10 +59,10 @@ INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-    }
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
