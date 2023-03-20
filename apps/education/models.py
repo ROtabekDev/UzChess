@@ -95,7 +95,7 @@ class Episode(BaseModel):
         verbose_name_plural = "Epizodlar"
 
 
-class Episode_viewed(BaseModel):
+class EpisodeViewed(BaseModel):
     """Video ko`rilganligi"""
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

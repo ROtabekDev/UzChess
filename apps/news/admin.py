@@ -5,10 +5,7 @@ from .models import Article, Views
 
 @admin.register(Article)
 class ArticleModelAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "title",
-    )
+    list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)
 
