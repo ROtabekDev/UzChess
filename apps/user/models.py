@@ -5,6 +5,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import RegexValidator
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from helpers.models import BaseModel
@@ -35,13 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 
     first_name = models.CharField("Ism", max_length=100)
     last_name = models.CharField("Familiya", max_length=100)
-    phone_number = models.CharField(
-        "Telefon nomer",
-        max_length=15,
-        unique=True,
-        error_messages={"unique": "Bu telefon nomer ro`yhatdan o`tgan!"},
-        validators=[RegexValidator(regex="^[+][998]{3}?[0-9]{9}$", message="Iltimos telefon nomerni to`g`ri kiriting")],
-    )
+    phone_number = PhoneNumberField("Telefon nomer", max_length=32, unique=True)
     email = models.EmailField("Elektron pochta", unique=True, blank=True, null=True)
     avatar = models.ImageField(
         "Sahifa uchun rasm", upload_to="user/user/avatar/", default="user/user/avatar/default-user.png"

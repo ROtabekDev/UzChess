@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 from helpers.models import BaseModel
 
@@ -74,7 +75,7 @@ class Order(BaseModel):
     cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
     first_name = models.CharField("Ismi", max_length=150)
     last_name = models.CharField("Familiya", max_length=150)
-    phone_number = models.CharField("Telefo raqam", max_length=20)
+    phone_number = PhoneNumberField("Telefon nomer", max_length=32)
     buying_type = models.CharField("Yetkazib berish turi", choices=BUYING_TYPE, max_length=20)
     region_id = models.ForeignKey("Region", on_delete=models.SET_NULL, null=True, blank=True)
     district_id = models.ForeignKey("District", on_delete=models.SET_NULL, null=True, blank=True)

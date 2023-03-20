@@ -3,6 +3,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 from helpers.models import BaseModel
 
@@ -33,7 +34,7 @@ class Contact(BaseModel):
     """Foydalanuvchi tomonidan yuboriladigan xabarlar uchun model"""
 
     first_name = models.CharField("Ism", max_length=150)
-    phone_number = models.CharField("Telefon nomer", max_length=20)
+    phone_number = PhoneNumberField("Telefon nomer", max_length=32, unique=True)
     message = models.TextField("Xabar")
 
     def __str__(self):

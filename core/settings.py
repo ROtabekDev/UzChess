@@ -54,6 +54,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "ckeditor",
     "ckeditor_uploader",
+    "phonenumber_field",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -195,3 +196,5 @@ SIMPLE_JWT = {
 }
 
 CKEDITOR_UPLOAD_PATH = "ckeditor/uploads/"
+
+PHONENUMBER_DEFAULT_REGION = "UZ"
