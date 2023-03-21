@@ -42,6 +42,8 @@ class ProductListSerializer(ModelSerializer):
             serializer = ProductImagesSerializer(images, many=True, context={"request": self.context["request"]})
             representation["images"] = serializer.data
 
+        representation["ct_model"] = "product"
+
         return representation
 
 
@@ -55,8 +57,6 @@ class ProductDetailSerializer(ModelSerializer):
 
         content_type = ContentType.objects.get(model="product")
         product = content_type.model_class().objects.get(slug=representation["slug"])
-        print(content_type)
-        print(product)
 
         count_ranking = Reviews.objects.filter(content_type=content_type, object_id=product.id).count()
         sum_ranking = Reviews.objects.filter(content_type=content_type, object_id=product.id).aggregate(
@@ -75,7 +75,6 @@ class ProductDetailSerializer(ModelSerializer):
 
         reviews = Reviews.objects.filter(content_type=content_type, object_id=product.id)
 
-        print(reviews)
         if reviews.exists():
             serializer = ReviewsSerializer(reviews, many=True)
             representation["reviews"] = serializer.data
@@ -88,5 +87,6 @@ class ProductDetailSerializer(ModelSerializer):
 
         representation["ranking"] = ranking
         representation["count_ranking"] = count_ranking
+        representation["ct_model"] = "product"
 
         return representation
