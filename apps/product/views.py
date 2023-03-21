@@ -1,8 +1,8 @@
 from rest_framework import filters
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Product
-from .serizlizers import ProductListSerializer
+from .serizlizers import ProductDetailSerializer, ProductListSerializer
 
 
 class ProductListAPIView(ListAPIView):
@@ -10,3 +10,9 @@ class ProductListAPIView(ListAPIView):
     serializer_class = ProductListSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ("title",)
+
+
+class ProductDetailAPIView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer
+    lookup_field = "slug"
