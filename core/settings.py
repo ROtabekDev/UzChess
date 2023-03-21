@@ -55,6 +55,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "phonenumber_field",
+    "django_filters",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -65,6 +66,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
 
 MIDDLEWARE = [

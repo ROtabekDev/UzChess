@@ -3,7 +3,6 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.core.validators import RegexValidator
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -51,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     objects = CustomUserManager()
 
     def __str__(self):
-        return self.phone_number
+        return f"{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = "Foydalanuvchi"
@@ -72,7 +71,7 @@ class SavedItem(BaseModel):
     content_object = GenericForeignKey("content_type", "object_id")
 
     def __str__(self):
-        return self.user_id.phone_number
+        return f"{self.user_id.first_name} {self.content_object}"
 
     class Meta:
         verbose_name = "Saqlagan narsa"

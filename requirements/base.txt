@@ -10,3 +10,4 @@ django-jazzmin==2.6.0
 django-ckeditor==6.5.1
 django-phonenumber-field==7.0.2
 phonenumbers==8.13.7
+django-filter==22.1
