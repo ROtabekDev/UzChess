@@ -80,6 +80,12 @@ class ProductDetailSerializer(ModelSerializer):
             serializer = ReviewsSerializer(reviews, many=True)
             representation["reviews"] = serializer.data
 
+        images = ProductImages.objects.filter(product_id=instance)
+
+        if images.exists():
+            serializer = ProductImagesSerializer(images, many=True, context={"request": self.context["request"]})
+            representation["images"] = serializer.data
+
         representation["ranking"] = ranking
         representation["count_ranking"] = count_ranking
 
