@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.serializers import ModelSerializer
 
-from .models import User
+from .models import SavedItem, User
 
 
 class RegisterSerializer(ModelSerializer):
@@ -56,3 +57,23 @@ class LoginSerializer(serializers.ModelSerializer):
             "phone_number": user.phone_number,
             "tokens": user.tokens,
         }
+
+
+class SavedItemCreateSerializer(serializers.ModelSerializer):
+    ct_model = serializers.CharField(write_only=True)
+    object_slug = serializers.SlugField(write_only=True)
+
+    class Meta:
+        model = SavedItem
+        fields = ("ct_model", "object_slug")
+
+    def create(self, validated_data):
+        content_type = ContentType.objects.get(model=validated_data["ct_model"])
+
+        product = content_type.model_class().objects.get(slug=validated_data["object_slug"])
+
+        user = self.context["request"].user
+
+        saved_item = SavedItem.objects.update_or_create(user_id=user, content_type=content_type, object_id=product.id)
+
+        return saved_item

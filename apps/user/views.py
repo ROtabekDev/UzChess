@@ -1,7 +1,8 @@
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 
-from .serializers import LoginSerializer, RegisterSerializer
+from .serializers import (LoginSerializer, RegisterSerializer,
+                          SavedItemCreateSerializer)
 
 
 class RegisterAPIView(CreateAPIView):
@@ -15,3 +16,7 @@ class LoginAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         pass
+
+
+class SavedItemCreateAPIView(CreateAPIView):
+    serializer_class = SavedItemCreateSerializer

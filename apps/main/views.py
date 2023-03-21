@@ -1,6 +1,5 @@
 from rest_framework.generics import CreateAPIView
 
-from .models import Contact, Reviews
 from .serializers import ContactSerializer, ReviewCreateSerializer
 
 
