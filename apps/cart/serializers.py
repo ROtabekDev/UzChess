@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count, Sum
 from django.http import Http404
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
@@ -25,9 +26,20 @@ class CartItemCreateSerializer(ModelSerializer):
 
         cart = Cart.objects.filter(user_id=user, in_order=False).first()
 
-        cart_item = CartItem.objects.create(user_id=user, cart=cart, content_type=content_type, object_id=product.id)
+        cart_item = CartItem.objects.filter(user_id=user, cart=cart, content_type=content_type, object_id=product.id)
 
-        CartProduct.objects.create(cart_id=cart, product_id=cart_item)
+        if not cart_item.exists():
+            cart_item = CartItem.objects.create(
+                user_id=user, cart=cart, content_type=content_type, object_id=product.id
+            )
+
+            CartProduct.objects.create(cart_id=cart, product_id=cart_item)
+
+            cart_data = CartItem.objects.filter(user_id=user, cart=cart).aggregate(Sum("final_price"), Count("qty"))
+
+            cart.final_price = cart_data["final_price__sum"]
+            cart.total_products = cart_data["qty__count"]
+            cart.save()
 
         return cart_item
 
@@ -55,6 +67,11 @@ class ChangeCartItemQTYSerializer(ModelSerializer):
         cart_item = CartItem.objects.get(user_id=user, cart=cart, content_type=content_type, object_id=product.id)
         cart_item.qty = validated_data["qty"]
         cart_item.save()
-        # CartProduct.objects.create(cart_id=cart, product_id=cart_item)
+
+        cart_data = CartItem.objects.filter(user_id=user, cart=cart).values("final_price", "qty").first()
+        cart.final_price = cart_data["final_price"]
+        cart.total_products = cart_data["qty"]
+
+        cart.save()
 
         return cart_item
