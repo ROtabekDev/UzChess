@@ -1,12 +1,12 @@
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import CreateAPIView, DestroyAPIView
+from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
 
 from .models import SavedItem
 from .serializers import (LoginSerializer, RegisterSerializer,
-                          SavedItemCreateSerializer)
+                          SavedItemCreateSerializer, SavedItemListSerializer)
 
 
 class RegisterAPIView(CreateAPIView):
@@ -42,3 +42,12 @@ class SavedItemDeleteAPIView(DestroyAPIView):
         saved_item = get_object_or_404(SavedItem, user_id=user, content_type=content_type, object_id=product.id)
 
         return saved_item
+
+
+class SavedItemListAPIView(ListAPIView):
+    serializer_class = SavedItemListSerializer
+    filterset_fields = ("content_type__model",)
+
+    def get_queryset(self):
+        queryset = SavedItem.objects.filter(user_id=self.request.user)
+        return queryset

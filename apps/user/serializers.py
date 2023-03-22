@@ -32,7 +32,7 @@ class RegisterSerializer(ModelSerializer):
         return User.objects.create_user(**validated_data)
 
 
-class LoginSerializer(serializers.ModelSerializer):
+class LoginSerializer(ModelSerializer):
     phone_number = serializers.CharField(max_length=15)
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     first_name = serializers.CharField(max_length=255, read_only=True)
@@ -60,7 +60,7 @@ class LoginSerializer(serializers.ModelSerializer):
         }
 
 
-class SavedItemCreateSerializer(serializers.ModelSerializer):
+class SavedItemCreateSerializer(ModelSerializer):
     ct_model = serializers.CharField(write_only=True)
     object_slug = serializers.SlugField(write_only=True)
 
@@ -80,3 +80,24 @@ class SavedItemCreateSerializer(serializers.ModelSerializer):
         saved_item = SavedItem.objects.update_or_create(user_id=user, content_type=content_type, object_id=product.id)
 
         return saved_item
+
+
+class ContentTypeSerializer(ModelSerializer):
+    class Meta:
+        model = ContentType
+        fields = "__all__"
+
+
+class SavedItemListSerializer(ModelSerializer):
+    class Meta:
+        model = SavedItem
+        fields = ("user_id", "content_type", "object_id")
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        ct_model = ContentType.objects.filter(id=representation["content_type"]).values("model").first()
+
+        representation["ct_model"] = ct_model["model"]
+
+        return representation
