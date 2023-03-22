@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.contenttypes.models import ContentType
+from django.http import Http404
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.serializers import ModelSerializer
@@ -68,9 +69,11 @@ class SavedItemCreateSerializer(serializers.ModelSerializer):
         fields = ("ct_model", "object_slug")
 
     def create(self, validated_data):
-        content_type = ContentType.objects.get(model=validated_data["ct_model"])
-
-        product = content_type.model_class().objects.get(slug=validated_data["object_slug"])
+        try:
+            content_type = ContentType.objects.get(model=validated_data["ct_model"])
+            product = content_type.model_class().objects.get(slug=validated_data["object_slug"])
+        except:
+            raise Http404
 
         user = self.context["request"].user
 
