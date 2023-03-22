@@ -16,6 +16,8 @@ class Product(BaseModel):
     reviews = GenericRelation(Reviews)
     qty = models.PositiveIntegerField("Mahsulotlar soni", default=0)
     available = models.BooleanField("Mavjudligi", default=False)
+    is_discount = models.BooleanField("Chegirma", default=False)
+    discount_price = models.DecimalField("Chegirmadagi narxi", max_digits=12, decimal_places=2, default=0)
 
     def __str__(self):
         return self.title

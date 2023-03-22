@@ -7,7 +7,7 @@ from .models import (Cart, CartItem, CartProduct, District, Order, PaymentType,
 @admin.register(CartItem)
 class CartItemModelAdmin(admin.ModelAdmin):
     list_display = ("id", "user_id", "cart", "content_object", "qty", "final_price")
-    list_display_links = ("id", "user_id", "cart")
+    list_display_links = ("id", "user_id", "cart", "content_object")
     list_filter = ("user_id", "cart")
 
 

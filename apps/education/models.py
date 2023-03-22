@@ -127,6 +127,7 @@ class Book(BaseModel):
     slider = models.ImageField("Rasm", upload_to="education/book/slider/")
     reviews = GenericRelation(Reviews)
     price = models.DecimalField("Narxi", max_digits=12, decimal_places=2, default=0)
+    available = models.BooleanField("Mavjudligi", default=False)
     is_discount = models.BooleanField("Chegirma", default=False)
     discount_price = models.DecimalField("Chegirmadagi narxi", max_digits=12, decimal_places=2, default=0)
 

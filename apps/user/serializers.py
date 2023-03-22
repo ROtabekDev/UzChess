@@ -5,6 +5,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.serializers import ModelSerializer
 
+from apps.cart.models import Cart
+
 from .models import SavedItem, User
 
 
@@ -29,7 +31,9 @@ class RegisterSerializer(ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)
+        Cart.objects.create(user_id=user, in_order=False)
+        return user
 
 
 class LoginSerializer(ModelSerializer):

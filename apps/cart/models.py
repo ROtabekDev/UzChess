@@ -16,7 +16,14 @@ class CartItem(BaseModel):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey("content_type", "object_id")
     qty = models.PositiveIntegerField(default=1)
-    final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Jami summa")
+    final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Jami summa", default=0)
+
+    def save(self, *args, **kwargs):
+        if self.content_object.is_discount:
+            self.final_price = self.qty * self.content_object.discount_price
+        else:
+            self.final_price = self.qty * self.content_object.price
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.content_object.title
@@ -31,18 +38,16 @@ class Cart(BaseModel):
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
     total_products = models.IntegerField(default=0, verbose_name="Jami mahsulotlar soni")
-    final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Jami summa", null=True, blank=True)
-    discout_price = models.DecimalField(
-        max_digits=12, decimal_places=2, verbose_name="Chegirma summasi", null=True, blank=True
-    )
-    discount_percentage = models.PositiveIntegerField("Chegirma foizi", null=True, blank=True)
+    final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Jami summa", default=0)
+    discout_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Chegirma summasi", default=0)
+    discount_percentage = models.PositiveIntegerField("Chegirma foizi", default=0)
     shipping_cost = models.DecimalField(
-        max_digits=12, decimal_places=2, verbose_name="Yetkazib berish narxi", null=True, blank=True
+        max_digits=12, decimal_places=2, verbose_name="Yetkazib berish narxi", default=0
     )
     in_order = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user_id.phone_number
+        return f"{self.user_id.first_name} {self.user_id.last_name}"
 
     class Meta:
         verbose_name = "Savat"
@@ -57,11 +62,11 @@ class CartProduct(BaseModel):
     product_id = models.ForeignKey(CartItem, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.id
+        return f"{self.cart_id.user_id.first_name} {self.cart_id.user_id.last_name}"
 
     class Meta:
-        verbose_name = "Savatdagi mahsulot"
-        verbose_name_plural = "Savatdagi mahsulotlar"
+        verbose_name = "Savatga tegishli mahsulot"
+        verbose_name_plural = "Savatga tegishli mahsulotlar"
 
 
 class BuyigType(models.TextChoices):
