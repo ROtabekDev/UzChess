@@ -18,12 +18,11 @@ class ProductImagesSerializer(ModelSerializer):
 
 
 class FeaturesSerializer(ModelSerializer):
-    product_id = serializers.StringRelatedField()
     feature_name_id = serializers.StringRelatedField()
 
     class Meta:
         model = Features
-        fields = ("product_id", "feature_name_id", "value")
+        fields = ("feature_name_id", "value")
 
 
 class ProductListSerializer(ModelSerializer):
@@ -84,6 +83,12 @@ class ProductDetailSerializer(ModelSerializer):
         if images.exists():
             serializer = ProductImagesSerializer(images, many=True, context={"request": self.context["request"]})
             representation["images"] = serializer.data
+
+        features = Features.objects.filter(product_id=instance)
+
+        if features.exists():
+            serializer = FeaturesSerializer(features, many=True)
+            representation["features"] = serializer.data
 
         representation["ranking"] = ranking
         representation["count_ranking"] = count_ranking
