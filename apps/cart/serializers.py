@@ -75,3 +75,27 @@ class ChangeCartItemQTYSerializer(ModelSerializer):
         cart.save()
 
         return cart_item
+
+
+class CartItemDeleteFromCartSerializer(ModelSerializer):
+    ct_model = serializers.CharField(write_only=True)
+    object_slug = serializers.SlugField(write_only=True)
+
+    class Meta:
+        model = CartItem
+        fields = ("ct_model", "object_slug", "cart_id")
+
+    def create(self, validated_data):
+        user = self.context["request"].user
+
+        try:
+            content_type = ContentType.objects.get(model=validated_data["ct_model"])
+            product = content_type.model_class().objects.get(slug=validated_data["object_slug"])
+            cart = Cart.objects.get(user_id=user, in_order=False)
+        except:
+            raise Http404
+
+        cart_item = CartItem.objects.get(user_id=user, cart=cart, content_type=content_type, object_id=product.id)
+        cart_item.delete()
+
+        return cart_item
