@@ -1,12 +1,14 @@
 from django.contrib.contenttypes.models import ContentType
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, UpdateAPIView)
 from rest_framework.permissions import AllowAny
 
-from .models import SavedItem
+from .models import SavedItem, User
 from .serializers import (LoginSerializer, RegisterSerializer,
-                          SavedItemCreateSerializer, SavedItemListSerializer)
+                          SavedItemCreateSerializer, SavedItemListSerializer,
+                          UserUpdateSerializer)
 
 
 class RegisterAPIView(CreateAPIView):
@@ -20,6 +22,13 @@ class LoginAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         pass
+
+
+class UserUpdateAPIView(UpdateAPIView):
+    serializer_class = UserUpdateSerializer
+
+    def get_object(self):
+        return self.request.user
 
 
 class SavedItemCreateAPIView(CreateAPIView):

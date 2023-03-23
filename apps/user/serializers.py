@@ -64,6 +64,12 @@ class LoginSerializer(ModelSerializer):
         }
 
 
+class UserUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "avatar", "birthday")
+
+
 class SavedItemCreateSerializer(ModelSerializer):
     ct_model = serializers.CharField(write_only=True)
     object_slug = serializers.SlugField(write_only=True)
