@@ -2,7 +2,7 @@ from rest_framework import filters
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 
 from .models import Product
-from .serizlizers import ProductDetailSerializer, ProductListSerializer
+from .serializers import ProductDetailSerializer, ProductListSerializer
 
 
 class ProductListAPIView(ListAPIView):

@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from apps.education.serializers import BookListSerializer
-from apps.product.serizlizers import ProductListSerializer
+from apps.product.serializers import ProductListSerializer
 from helpers.utils import update_cart
 
 from .models import (Cart, CartItem, CartProduct, District, Order, PaymentType,
