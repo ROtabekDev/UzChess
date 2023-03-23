@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import CreateAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
-from .models import Cart
+from .models import Cart, District, PaymentType, Region
 from .serializers import (CartDetailSerializer, CartItemCreateSerializer,
                           CartItemDeleteFromCartSerializer,
-                          ChangeCartItemQTYSerializer, OrderCreateSerializer)
+                          ChangeCartItemQTYSerializer, DistrictListSerializer,
+                          OrderCreateSerializer, PaymentTypeListSerializer,
+                          RegionListSerializer)
 
 
 class CartItemCreateAPIView(CreateAPIView):
@@ -49,3 +51,18 @@ class OrderCreateAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user_id=self.request.user)
+
+
+class RegionListAPIView(ListAPIView):
+    queryset = Region.objects.all()
+    serializer_class = RegionListSerializer
+
+
+class DistrictListAPIView(ListAPIView):
+    queryset = District.objects.all()
+    serializer_class = DistrictListSerializer
+
+
+class PaymentTypeListAPIView(ListAPIView):
+    queryset = PaymentType.objects.all()
+    serializer_class = PaymentTypeListSerializer

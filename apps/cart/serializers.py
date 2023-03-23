@@ -7,7 +7,8 @@ from apps.education.serializers import BookListSerializer
 from apps.product.serizlizers import ProductListSerializer
 from helpers.utils import update_cart
 
-from .models import Cart, CartItem, CartProduct, Order
+from .models import (Cart, CartItem, CartProduct, District, Order, PaymentType,
+                     Region)
 
 
 class CartItemCreateSerializer(ModelSerializer):
@@ -159,12 +160,11 @@ class OrderCreateSerializer(ModelSerializer):
         read_only_fields = ("user_id",)
 
     def create(self, validated_data):
-         
         cart_id = validated_data["cart_id"]
         cart = Cart.objects.get(id=cart_id.id)
-        if cart.in_order!=False:
-            raise serializers.ValidationError({'message': 'Bu savatga buyurtma berilgan!'})
-        
+        if cart.in_order != False:
+            raise serializers.ValidationError({"message": "Bu savatga buyurtma berilgan!"})
+
         cart.in_order = True
         cart.save()
 
@@ -172,3 +172,23 @@ class OrderCreateSerializer(ModelSerializer):
         Cart.objects.create(user_id=user, in_order=False)
 
         return super().create(validated_data)
+
+
+class RegionListSerializer(ModelSerializer):
+    class Meta:
+        model = Region
+        fields = ("id", "title")
+
+
+class DistrictListSerializer(ModelSerializer):
+    region_id = serializers.StringRelatedField()
+
+    class Meta:
+        model = District
+        fields = ("id", "title", "region_id")
+
+
+class PaymentTypeListSerializer(ModelSerializer):
+    class Meta:
+        model = PaymentType
+        fields = ("id", "title")
