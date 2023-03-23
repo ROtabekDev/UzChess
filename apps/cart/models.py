@@ -98,7 +98,7 @@ class Order(BaseModel):
     text = models.TextField("Xabar")
     payment_type = models.ForeignKey("PaymentType", on_delete=models.SET_NULL, null=True, blank=True)
     order_number = models.PositiveBigIntegerField("Buyurtma raqami", unique=True)
-    status = models.CharField("Buyurtma holati", choices=OrderStatus.choices, max_length=20)
+    status = models.CharField("Buyurtma holati", choices=OrderStatus.choices, max_length=20, default="In_progress")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.phone_number}"

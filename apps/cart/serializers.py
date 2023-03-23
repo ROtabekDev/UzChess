@@ -172,11 +172,10 @@ class OrderCreateSerializer(ModelSerializer):
         Cart.objects.create(user_id=user, in_order=False)
 
         return super().create(validated_data)
-    
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-  
+
         representation["order_number"] = instance.order_number
 
         return representation
@@ -200,3 +199,28 @@ class PaymentTypeListSerializer(ModelSerializer):
     class Meta:
         model = PaymentType
         fields = ("id", "title")
+
+
+class CartMiniForOrderListSerializer(ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ("id", "final_price")
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        products = CartItem.objects.filter(cart=instance)
+
+        if products.exists():
+            serializer = CartItemListSerializer(products, many=True, context={"request": self.context["request"]})
+            representation["products"] = serializer.data
+
+        return representation
+
+
+class OrderListSerializer(ModelSerializer):
+    cart_id = CartMiniForOrderListSerializer()
+
+    class Meta:
+        model = Order
+        fields = ("id", "order_number", "status", "cart_id")
