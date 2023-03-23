@@ -159,8 +159,12 @@ class OrderCreateSerializer(ModelSerializer):
         read_only_fields = ("user_id",)
 
     def create(self, validated_data):
+         
         cart_id = validated_data["cart_id"]
         cart = Cart.objects.get(id=cart_id.id)
+        if cart.in_order!=False:
+            raise serializers.ValidationError({'message': 'Bu savatga buyurtma berilgan!'})
+        
         cart.in_order = True
         cart.save()
 
