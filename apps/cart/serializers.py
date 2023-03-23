@@ -3,6 +3,8 @@ from django.http import Http404
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
+from apps.education.serializers import BookListSerializer
+from apps.product.serizlizers import ProductListSerializer
 from helpers.utils import update_cart
 
 from .models import Cart, CartItem, CartProduct
@@ -96,9 +98,43 @@ class CartItemDeleteFromCartSerializer(ModelSerializer):
         return cart_item
 
 
+class CartItemListSerializer(ModelSerializer):
+    product_data = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CartItem
+        fields = (
+            "content_type",
+            "object_id",
+            "product_data",
+            "qty",
+            "final_price",
+        )
+
+    def get_product_data(self, obj):
+        if obj.content_type_id == 21:
+            serializer = BookListSerializer(obj.content_object, context={"request": self.context["request"]})
+        elif obj.content_type_id == 23:
+            serializer = ProductListSerializer(obj.content_object, context={"request": self.context["request"]})
+        else:
+            return {}
+        return serializer.data
+
+
 class CartDetailSerializer(ModelSerializer):
     user_id = serializers.StringRelatedField()
 
     class Meta:
         model = Cart
         fields = ("user_id", "total_products", "final_price")
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        products = CartItem.objects.filter(cart=instance)
+
+        if products.exists():
+            serializer = CartItemListSerializer(products, many=True, context={"request": self.context["request"]})
+            representation["products"] = serializer.data
+
+        return representation
