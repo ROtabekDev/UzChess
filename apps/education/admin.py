@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (Book, CategoryForCourse, CompletedCourse, Course, Episode,
-                     EpisodeViewed, PurchasedBook, PurchasedCourse, Section)
+                     EpisodeViewed, PurchasedBook, PurchasedCourse, Section, Certificate)
 
 
 @admin.register(CategoryForCourse)
@@ -67,4 +67,11 @@ class CompletedCourseViewedModelAdmin(admin.ModelAdmin):
 class PurchasedBookViewedModelAdmin(admin.ModelAdmin):
     list_display = ("id", "user_id", "book_id", "qty")
     list_display_links = ("user_id", "book_id")
+    list_filter = ("user_id",)
+
+
+@admin.register(Certificate)
+class CertificateModelAdmin(admin.ModelAdmin):
+    list_display = ("id", "user_id", "course_id")
+    list_display_links = ("user_id", "course_id")
     list_filter = ("user_id",)

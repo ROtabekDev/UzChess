@@ -125,6 +125,7 @@ class District(BaseModel):
 
     title = models.CharField("Nomi", max_length=50)
     slug = models.SlugField("Slugi", max_length=50)
+    region_id = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='Viloyat')
 
     def __str__(self):
         return self.title

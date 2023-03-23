@@ -182,3 +182,18 @@ class PurchasedBook(BaseModel):
     class Meta:
         verbose_name = "Sotib olingan kitob"
         verbose_name_plural = "Sotib olingan kitoblar"
+
+
+class Certificate(BaseModel):
+    """Sertifikat uchun model"""
+
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Kurs")
+    file = models.FileField('Fayl', blank=True, null=True, upload_to='education/certificate/file/')
+
+    def __str__(self):
+        return f'{self.user_id.first_name} + {self.user_id.first_name}'
+    
+    class Meta:
+        verbose_name = 'Sertifikat'
+        verbose_name_plural = 'Sertifikatlar'
