@@ -66,8 +66,8 @@ class SavedItem(BaseModel):
     """Saqlab qo`yilgan narsalar uchun model"""
 
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name="Model")
+    object_id = models.PositiveIntegerField("Obyekt id")
     content_object = GenericForeignKey("content_type", "object_id")
 
     def __str__(self):

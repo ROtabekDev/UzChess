@@ -14,8 +14,8 @@ class Reviews(BaseModel):
     Masalan, Shaxmat kursi uchun 5 baho, kurs alo darajada"""
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name="Model")
+    object_id = models.PositiveIntegerField(verbose_name="Obyekt id")
     content_object = GenericForeignKey("content_type", "object_id")
     rate_number = models.PositiveIntegerField(
         "Reyting qiymati", validators=[MinValueValidator(0), MaxValueValidator(5)], default=0

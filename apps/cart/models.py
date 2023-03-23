@@ -12,11 +12,11 @@ class CartItem(BaseModel):
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
     cart = models.ForeignKey("Cart", verbose_name="Savat", on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name="Mahsulot turi")
+    object_id = models.PositiveIntegerField(verbose_name="Mahsulot id")
     content_object = GenericForeignKey("content_type", "object_id")
-    qty = models.PositiveIntegerField(default=1)
-    final_price = models.DecimalField(max_digits=12, decimal_places=2, verbose_name="Jami summa", default=0)
+    qty = models.PositiveIntegerField("Mahsulotlar soni", default=1)
+    final_price = models.DecimalField("Jami summa", max_digits=12, decimal_places=2, default=0)
 
     def save(self, *args, **kwargs):
         if self.content_object.is_discount:
@@ -44,7 +44,7 @@ class Cart(BaseModel):
     shipping_cost = models.DecimalField(
         max_digits=12, decimal_places=2, verbose_name="Yetkazib berish narxi", default=0
     )
-    in_order = models.BooleanField(default=False)
+    in_order = models.BooleanField("Buyurtma qiliganligi", default=False)
 
     def __str__(self):
         return f"{self.user_id.first_name} {self.user_id.last_name}"
@@ -58,8 +58,8 @@ class CartProduct(BaseModel):
     """Qaysi savatga qaysi mahsulot tegishli
     ekanligini saqlab borish uchun model"""
 
-    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product_id = models.ForeignKey(CartItem, on_delete=models.CASCADE)
+    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name="Savat")
+    product_id = models.ForeignKey(CartItem, on_delete=models.CASCADE, verbose_name="Mahsulot")
 
     def __str__(self):
         return f"{self.cart_id.user_id.first_name} {self.cart_id.user_id.last_name}"
@@ -85,7 +85,7 @@ class Order(BaseModel):
     """Buyurtmalar uchun model"""
 
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
-    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name="Savat")
     first_name = models.CharField("Ismi", max_length=150)
     last_name = models.CharField("Familiya", max_length=150)
     phone_number = PhoneNumberField("Telefon nomer", max_length=32)

@@ -11,7 +11,7 @@ class Article(BaseModel):
     title = models.CharField("Sarlavhasi", max_length=250)
     slug = models.SlugField("Slugi", max_length=250)
     slider = models.ImageField("Rasm", upload_to="blog/blog/slider/")
-    content = RichTextUploadingField()
+    content = RichTextUploadingField(verbose_name="Maqola matni")
 
     def __str__(self):
         return self.title
@@ -24,8 +24,8 @@ class Article(BaseModel):
 class Views(BaseModel):
     """Ko`rishlar soni"""
 
-    article_id = models.ForeignKey(Article, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    article_id = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Maqola")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Foydalanuvchi")
     device_id = models.CharField("Qurilma manzili", max_length=250, null=True, blank=True)
 
     def __str__(self):

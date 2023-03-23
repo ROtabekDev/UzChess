@@ -58,8 +58,8 @@ class Section(BaseModel):
     title = models.CharField("Sarlavhasi", max_length=150)
     order = models.PositiveIntegerField("Tartib nomeri", default=1)
     section_type = models.CharField("Bo`lim turi", choices=SectioType.choices, default="Not seen", max_length=20)
-    is_public = models.BooleanField(default=False)
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+    is_public = models.BooleanField("Hamma uchun", default=False)
+    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name="Kurs")
 
     def __str__(self):
         return f"{self.order}. {self.title}"
@@ -76,8 +76,10 @@ class Episode(BaseModel):
     slug = models.SlugField("Slugi", max_length=150)
     file = models.FileField("Fayl", upload_to="course/episode/file/")
     order = models.PositiveIntegerField("Tartib nomeri", default=1)
-    length = models.DecimalField(max_digits=100, decimal_places=2, blank=True, null=True, default=0)
-    section_id = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True)
+    length = models.DecimalField(
+        "Video davomiyligi", max_digits=100, decimal_places=2, blank=True, null=True, default=0
+    )
+    section_id = models.ForeignKey(Section, on_delete=models.CASCADE, blank=True, null=True, verbose_name="Bo`lim")
 
     def get_video_length(self):
         try:
@@ -102,8 +104,8 @@ class Episode(BaseModel):
 class EpisodeViewed(BaseModel):
     """Video ko`rilganligi"""
 
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    episode_id = models.ForeignKey(Episode, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
+    episode_id = models.ForeignKey(Episode, on_delete=models.CASCADE, verbose_name="Video")
 
     def __str__(self):
         return self.episode_id.title

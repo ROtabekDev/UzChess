@@ -30,8 +30,8 @@ class Product(BaseModel):
 class Features(BaseModel):
     """Mahsulot xususiyatlari uchun model"""
 
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
-    feature_name_id = models.ForeignKey("FeatureName", on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Mahsulot")
+    feature_name_id = models.ForeignKey("FeatureName", on_delete=models.CASCADE, verbose_name="Xususiyat nomi")
     value = models.CharField("Qiymati", max_length=150)
 
     def __str__(self):
@@ -59,7 +59,7 @@ class FeatureName(BaseModel):
 class ProductImages(BaseModel):
     """Mahsulot rasmlarini saqlovchi model"""
 
-    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="Mahsulot")
     image = models.ImageField("Rasmi", upload_to="product/product-images/image/")
     use_in_slider = models.BooleanField("Slider uchun", default=False)
 
