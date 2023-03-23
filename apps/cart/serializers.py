@@ -172,6 +172,14 @@ class OrderCreateSerializer(ModelSerializer):
         Cart.objects.create(user_id=user, in_order=False)
 
         return super().create(validated_data)
+    
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+  
+        representation["order_number"] = instance.order_number
+
+        return representation
 
 
 class RegionListSerializer(ModelSerializer):
