@@ -1,3 +1,5 @@
+import random
+
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -101,6 +103,16 @@ class Order(BaseModel):
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.phone_number}"
 
+    def save(self, *args, **kwargs):
+        while True:
+            order_number = "".join([str(random.randint(1, 9)) for _ in range(12)])
+
+            if not Order.objects.filter(order_number=int(order_number)).exists():
+                order_number = int(order_number)
+                self.order_number = order_number
+                break
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "Buyurtma"
         verbose_name_plural = "Buyurtmalar"
@@ -125,7 +137,7 @@ class District(BaseModel):
 
     title = models.CharField("Nomi", max_length=50)
     slug = models.SlugField("Slugi", max_length=50)
-    region_id = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name='Viloyat')
+    region_id = models.ForeignKey(Region, on_delete=models.CASCADE, verbose_name="Viloyat")
 
     def __str__(self):
         return self.title

@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import Cart
 from .serializers import (CartDetailSerializer, CartItemCreateSerializer,
                           CartItemDeleteFromCartSerializer,
-                          ChangeCartItemQTYSerializer)
+                          ChangeCartItemQTYSerializer, OrderCreateSerializer)
 
 
 class CartItemCreateAPIView(CreateAPIView):
@@ -42,3 +42,10 @@ class CartDetailAPIView(RetrieveAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset)
         return obj
+
+
+class OrderCreateAPIView(CreateAPIView):
+    serializer_class = OrderCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user_id=self.request.user)

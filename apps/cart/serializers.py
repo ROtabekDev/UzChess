@@ -7,7 +7,7 @@ from apps.education.serializers import BookListSerializer
 from apps.product.serizlizers import ProductListSerializer
 from helpers.utils import update_cart
 
-from .models import Cart, CartItem, CartProduct
+from .models import Cart, CartItem, CartProduct, Order
 
 
 class CartItemCreateSerializer(ModelSerializer):
@@ -126,7 +126,7 @@ class CartDetailSerializer(ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ("user_id", "total_products", "final_price")
+        fields = ("id", "user_id", "total_products", "final_price")
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -138,3 +138,33 @@ class CartDetailSerializer(ModelSerializer):
             representation["products"] = serializer.data
 
         return representation
+
+
+class OrderCreateSerializer(ModelSerializer):
+    class Meta:
+        model = Order
+        fields = (
+            "cart_id",
+            "first_name",
+            "last_name",
+            "phone_number",
+            "buying_type",
+            "region_id",
+            "district_id",
+            "home_address",
+            "text",
+            "payment_type",
+        )
+
+        read_only_fields = ("user_id",)
+
+    def create(self, validated_data):
+        cart_id = validated_data["cart_id"]
+        cart = Cart.objects.get(id=cart_id.id)
+        cart.in_order = True
+        cart.save()
+
+        user = self.context["request"].user
+        Cart.objects.create(user_id=user, in_order=False)
+
+        return super().create(validated_data)
