@@ -29,9 +29,7 @@ class CartItemCreateSerializer(ModelSerializer):
         user = self.context["request"].user
 
         cart = Cart.objects.filter(user_id=user, in_order=False).first()
-
-        cart_item = CartItem.objects.filter(user_id=user, cart=cart, content_type=content_type, object_id=product.id)
-
+ 
         cart_item, created = CartItem.objects.get_or_create(
             user_id=user, cart=cart, content_type=content_type, object_id=product.id
         )
