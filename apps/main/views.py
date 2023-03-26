@@ -1,11 +1,17 @@
 import requests
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from bs4 import BeautifulSoup
+from dj_rest_auth.registration.views import SocialLoginView
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import ContactSerializer, ReviewCreateSerializer
+
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
 
 
 class GetPlayersRating(APIView):

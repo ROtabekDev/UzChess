@@ -15,7 +15,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from core.jazzmin import *
+from core.jazzmin import *  # noqa
 
 load_dotenv()
 
@@ -45,30 +45,51 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 CUSTOM_APPS = ["apps.cart", "apps.education", "apps.main", "apps.product", "apps.user", "apps.news"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "drf_yasg",
     "ckeditor",
     "ckeditor_uploader",
     "phonenumber_field",
     "django_filters",
+    "allauth",
+    "dj_rest_auth",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
 
+SITE_ID = 1
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
 }
+
 SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": {"api_key": {"type": "apiKey", "in": "header", "name": "Authorization"}}}
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {"APP": {"client_id": getenv("GOOGLE_CLIENT_ID"), "secret": getenv("GOOGLE_SECRET_KEY"), "key": ""}}
+}
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = "phone_number"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 
 MIDDLEWARE = [
