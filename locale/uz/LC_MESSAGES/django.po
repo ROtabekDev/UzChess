@@ -1,0 +1,540 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-27 11:39+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+#: .\apps\cart\models.py:16 .\apps\cart\models.py:42 .\apps\cart\models.py:90
+#: .\apps\education\models.py:108 .\apps\education\models.py:148
+#: .\apps\education\models.py:162 .\apps\education\models.py:176
+#: .\apps\education\models.py:191 .\apps\main\models.py:17
+#: .\apps\news\models.py:29 .\apps\product\models.py:78
+#: .\apps\user\models.py:57 .\apps\user\models.py:69
+msgid "Foydalanuvchi"
+msgstr ""
+
+#: .\apps\cart\models.py:17 .\apps\cart\models.py:56 .\apps\cart\models.py:64
+#: .\apps\cart\models.py:91
+msgid "Savat"
+msgstr ""
+
+#: .\apps\cart\models.py:18
+msgid "Mahsulot turi"
+msgstr ""
+
+#: .\apps\cart\models.py:19
+msgid "Mahsulot id"
+msgstr ""
+
+#: .\apps\cart\models.py:21 .\apps\product\models.py:18
+#: .\apps\product\models.py:80
+msgid "Mahsulotlar soni"
+msgstr ""
+
+#: .\apps\cart\models.py:22 .\apps\cart\models.py:44
+msgid "Jami summa"
+msgstr ""
+
+#: .\apps\cart\models.py:35
+msgid "Savatdagi mahsulot"
+msgstr ""
+
+#: .\apps\cart\models.py:36
+msgid "Savatdagi mahsulotlar"
+msgstr ""
+
+#: .\apps\cart\models.py:43
+msgid "Jami mahsulotlar soni"
+msgstr ""
+
+#: .\apps\cart\models.py:45
+msgid "Chegirma summasi"
+msgstr ""
+
+#: .\apps\cart\models.py:46
+msgid "Chegirma foizi"
+msgstr ""
+
+#: .\apps\cart\models.py:50
+msgid "Buyurtma qiliganligi"
+msgstr ""
+
+#: .\apps\cart\models.py:57
+msgid "Savatlar"
+msgstr ""
+
+#: .\apps\cart\models.py:65 .\apps\product\models.py:27
+#: .\apps\product\models.py:34 .\apps\product\models.py:63
+msgid "Mahsulot"
+msgstr ""
+
+#: .\apps\cart\models.py:71
+msgid "Savatga tegishli mahsulot"
+msgstr ""
+
+#: .\apps\cart\models.py:72
+msgid "Savatga tegishli mahsulotlar"
+msgstr ""
+
+#: .\apps\cart\models.py:81
+msgid "Yangi"
+msgstr ""
+
+#: .\apps\cart\models.py:82
+msgid "Jarayoda"
+msgstr ""
+
+#: .\apps\cart\models.py:83
+msgid "Xatolik"
+msgstr ""
+
+#: .\apps\cart\models.py:84
+msgid "Bajarildi"
+msgstr ""
+
+#: .\apps\cart\models.py:92 .\apps\main\models.py:68
+msgid "Ismi"
+msgstr ""
+
+#: .\apps\cart\models.py:93 .\apps\user\models.py:38
+msgid "Familiya"
+msgstr ""
+
+#: .\apps\cart\models.py:94 .\apps\main\models.py:38 .\apps\user\models.py:39
+msgid "Telefon nomer"
+msgstr ""
+
+#: .\apps\cart\models.py:95
+msgid "Yetkazib berish turi"
+msgstr ""
+
+#: .\apps\cart\models.py:96 .\apps\cart\models.py:136 .\apps\cart\models.py:145
+msgid "Viloyat"
+msgstr ""
+
+#: .\apps\cart\models.py:98 .\apps\cart\models.py:151
+msgid "Tuman"
+msgstr ""
+
+#: .\apps\cart\models.py:101 .\apps\main\models.py:24 .\apps\main\models.py:39
+#: .\apps\main\models.py:45
+msgid "Xabar"
+msgstr ""
+
+#: .\apps\cart\models.py:103
+msgid "To`lov turi"
+msgstr ""
+
+#: .\apps\cart\models.py:105
+msgid "Buyurtma raqami"
+msgstr ""
+
+#: .\apps\cart\models.py:106
+msgid "Buyurtma holati"
+msgstr ""
+
+#: .\apps\cart\models.py:122
+msgid "Buyurtma"
+msgstr ""
+
+#: .\apps\cart\models.py:123
+msgid "Buyurtmalar"
+msgstr ""
+
+#: .\apps\cart\models.py:129 .\apps\cart\models.py:143
+#: .\apps\cart\models.py:158 .\apps\education\models.py:76
+#: .\apps\main\models.py:53 .\apps\main\models.py:83
+#: .\apps\product\models.py:13 .\apps\product\models.py:49
+msgid "Nomi"
+msgstr ""
+
+#: .\apps\cart\models.py:130 .\apps\cart\models.py:144
+#: .\apps\cart\models.py:159 .\apps\education\models.py:15
+#: .\apps\education\models.py:29 .\apps\education\models.py:77
+#: .\apps\education\models.py:123 .\apps\main\models.py:54
+#: .\apps\main\models.py:84 .\apps\news\models.py:13
+#: .\apps\product\models.py:14 .\apps\product\models.py:50
+msgid "Slugi"
+msgstr ""
+
+#: .\apps\cart\models.py:137
+msgid "Viloyatlar"
+msgstr ""
+
+#: .\apps\cart\models.py:152
+msgid "Tumanlar"
+msgstr ""
+
+#: .\apps\cart\models.py:165
+msgid "To`lov usuli"
+msgstr ""
+
+#: .\apps\cart\models.py:166
+msgid "To`lov usullari"
+msgstr ""
+
+#: .\apps\education\models.py:14 .\apps\education\models.py:59
+#: .\apps\news\models.py:12
+msgid "Sarlavhasi"
+msgstr ""
+
+#: .\apps\education\models.py:21 .\apps\education\models.py:31
+msgid "Kategoriya"
+msgstr ""
+
+#: .\apps\education\models.py:22
+msgid "Kategoriyalar"
+msgstr ""
+
+#: .\apps\education\models.py:28
+msgid "Kurs nomi"
+msgstr ""
+
+#: .\apps\education\models.py:30 .\apps\education\models.py:124
+#: .\apps\main\models.py:75
+msgid "Muallif"
+msgstr ""
+
+#: .\apps\education\models.py:32
+msgid "Kurs darajasi"
+msgstr ""
+
+#: .\apps\education\models.py:33 .\apps\education\models.py:126
+msgid "Tili"
+msgstr ""
+
+#: .\apps\education\models.py:34
+msgid "Kurs haqida ma`lumot"
+msgstr ""
+
+#: .\apps\education\models.py:35 .\apps\education\models.py:130
+#: .\apps\news\models.py:14
+msgid "Rasm"
+msgstr ""
+
+#: .\apps\education\models.py:37 .\apps\education\models.py:132
+#: .\apps\product\models.py:16
+msgid "Narxi"
+msgstr ""
+
+#: .\apps\education\models.py:38 .\apps\education\models.py:134
+#: .\apps\product\models.py:20
+msgid "Chegirma"
+msgstr ""
+
+#: .\apps\education\models.py:39 .\apps\education\models.py:135
+#: .\apps\product\models.py:21
+msgid "Chegirmadagi narxi"
+msgstr ""
+
+#: .\apps\education\models.py:40
+msgid "Bepul"
+msgstr ""
+
+#: .\apps\education\models.py:46 .\apps\education\models.py:63
+#: .\apps\education\models.py:149 .\apps\education\models.py:163
+#: .\apps\education\models.py:177 .\apps\education\models.py:192
+#: .\apps\product\models.py:79
+msgid "Kurs"
+msgstr ""
+
+#: .\apps\education\models.py:47
+msgid "Kurslar"
+msgstr ""
+
+#: .\apps\education\models.py:51
+msgid "Ko`rilmagan"
+msgstr ""
+
+#: .\apps\education\models.py:52
+msgid "Jarayonda"
+msgstr ""
+
+#: .\apps\education\models.py:53
+msgid "Ko`rilgan"
+msgstr ""
+
+#: .\apps\education\models.py:60 .\apps\education\models.py:79
+msgid "Tartib nomeri"
+msgstr ""
+
+#: .\apps\education\models.py:61
+msgid "Bo`lim turi"
+msgstr ""
+
+#: .\apps\education\models.py:62
+msgid "Hamma uchun"
+msgstr ""
+
+#: .\apps\education\models.py:69 .\apps\education\models.py:83
+msgid "Bo`lim"
+msgstr ""
+
+#: .\apps\education\models.py:70
+msgid "Bo`limlar"
+msgstr ""
+
+#: .\apps\education\models.py:78 .\apps\education\models.py:193
+msgid "Fayl"
+msgstr ""
+
+#: .\apps\education\models.py:81
+msgid "Video davomiyligi"
+msgstr ""
+
+#: .\apps\education\models.py:101
+msgid "Epizod"
+msgstr ""
+
+#: .\apps\education\models.py:102
+msgid "Epizodlar"
+msgstr ""
+
+#: .\apps\education\models.py:109
+msgid "Video"
+msgstr ""
+
+#: .\apps\education\models.py:115 .\apps\education\models.py:116
+msgid "Video ko`rilganligi"
+msgstr ""
+
+#: .\apps\education\models.py:122
+msgid "Kitob nomi"
+msgstr ""
+
+#: .\apps\education\models.py:125
+msgid "Kitob darajasi"
+msgstr ""
+
+#: .\apps\education\models.py:127
+msgid "Sahifalar soni"
+msgstr ""
+
+#: .\apps\education\models.py:128
+msgid "Ishlab chiqarilgan yili"
+msgstr ""
+
+#: .\apps\education\models.py:129
+msgid "Kitob haqida ma`lumot"
+msgstr ""
+
+#: .\apps\education\models.py:133 .\apps\product\models.py:19
+msgid "Mavjudligi"
+msgstr ""
+
+#: .\apps\education\models.py:141
+msgid "Kitob"
+msgstr ""
+
+#: .\apps\education\models.py:142
+msgid "Kitoblar"
+msgstr ""
+
+#: .\apps\education\models.py:155
+msgid "Sotib olingan kurs"
+msgstr ""
+
+#: .\apps\education\models.py:156
+msgid "Sotib olingan kurslar"
+msgstr ""
+
+#: .\apps\education\models.py:169
+msgid "Tugatilgan kurs"
+msgstr ""
+
+#: .\apps\education\models.py:170
+msgid "Tugatilgan kurslar"
+msgstr ""
+
+#: .\apps\education\models.py:178
+msgid "Kitoblar soni"
+msgstr ""
+
+#: .\apps\education\models.py:184
+msgid "Sotib olingan kitob"
+msgstr ""
+
+#: .\apps\education\models.py:185
+msgid "Sotib olingan kitoblar"
+msgstr ""
+
+#: .\apps\education\models.py:199
+msgid "Sertifikat"
+msgstr ""
+
+#: .\apps\education\models.py:200
+msgid "Sertifikatlar"
+msgstr ""
+
+#: .\apps\main\models.py:18 .\apps\user\models.py:70
+msgid "Model"
+msgstr ""
+
+#: .\apps\main\models.py:19 .\apps\user\models.py:71
+msgid "Obyekt id"
+msgstr ""
+
+#: .\apps\main\models.py:22
+msgid "Reyting qiymati"
+msgstr ""
+
+#: .\apps\main\models.py:30
+msgid "Izoh"
+msgstr ""
+
+#: .\apps\main\models.py:31
+msgid "Izohlar"
+msgstr ""
+
+#: .\apps\main\models.py:37 .\apps\user\models.py:37
+msgid "Ism"
+msgstr ""
+
+#: .\apps\main\models.py:46
+msgid "Xabarlar"
+msgstr ""
+
+#: .\apps\main\models.py:60
+msgid "Daraja"
+msgstr ""
+
+#: .\apps\main\models.py:61
+msgid "Darajalar"
+msgstr ""
+
+#: .\apps\main\models.py:69
+msgid "Familiyasi"
+msgstr ""
+
+#: .\apps\main\models.py:76
+msgid "Mualliflar"
+msgstr ""
+
+#: .\apps\main\models.py:90
+msgid "Til"
+msgstr ""
+
+#: .\apps\main\models.py:91
+msgid "Tillar"
+msgstr ""
+
+#: .\apps\news\models.py:15
+msgid "Maqola matni"
+msgstr ""
+
+#: .\apps\news\models.py:21 .\apps\news\models.py:28
+msgid "Maqola"
+msgstr ""
+
+#: .\apps\news\models.py:22
+msgid "Maqolalar"
+msgstr ""
+
+#: .\apps\news\models.py:30
+msgid "Qurilma manzili"
+msgstr ""
+
+#: .\apps\news\models.py:36 .\apps\news\models.py:37
+msgid "Ko`rishlar soni"
+msgstr ""
+
+#: .\apps\product\models.py:15
+msgid "Tavsifi"
+msgstr ""
+
+#: .\apps\product\models.py:28
+msgid "Mahsulotlar"
+msgstr ""
+
+#: .\apps\product\models.py:35 .\apps\product\models.py:56
+msgid "Xususiyat nomi"
+msgstr ""
+
+#: .\apps\product\models.py:36
+msgid "Qiymati"
+msgstr ""
+
+#: .\apps\product\models.py:42
+msgid "Mahsulot xususiyati"
+msgstr ""
+
+#: .\apps\product\models.py:43
+msgid "Mahsulot xususiyatlari"
+msgstr ""
+
+#: .\apps\product\models.py:57
+msgid "Xususiyat nomlari"
+msgstr ""
+
+#: .\apps\product\models.py:64
+msgid "Rasmi"
+msgstr ""
+
+#: .\apps\product\models.py:65
+msgid "Slider uchun"
+msgstr ""
+
+#: .\apps\product\models.py:71
+msgid "Mahsulot rasmi"
+msgstr ""
+
+#: .\apps\product\models.py:72
+msgid "Mahsulot rasmlari"
+msgstr ""
+
+#: .\apps\product\models.py:86
+msgid "Sotib olingan mahsulot"
+msgstr ""
+
+#: .\apps\product\models.py:87
+msgid "Sotib olingan mahsulotlar"
+msgstr ""
+
+#: .\apps\user\models.py:40
+msgid "Elektron pochta"
+msgstr ""
+
+#: .\apps\user\models.py:42
+msgid "Sahifa uchun rasm"
+msgstr ""
+
+#: .\apps\user\models.py:44
+msgid "Tug`ilgan sanasi"
+msgstr ""
+
+#: .\apps\user\models.py:58
+msgid "Barcha foydalanuvchilar"
+msgstr ""
+
+#: .\apps\user\models.py:78
+msgid "Saqlagan narsa"
+msgstr ""
+
+#: .\apps\user\models.py:79
+msgid "Saqlagan narsalar"
+msgstr ""
+
+#: .\core\settings.py:182
+msgid "Uzbek"
+msgstr ""
+
+#: .\core\settings.py:183
+msgid "Russian"
+msgstr ""
+
+#: .\core\settings.py:184
+msgid "English"
+msgstr ""
