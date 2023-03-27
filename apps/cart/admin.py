@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from .models import (Cart, CartItem, CartProduct, District, Order, PaymentType,
                      Region)
@@ -36,21 +37,21 @@ class BlogModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Region)
-class RegionModelAdmin(admin.ModelAdmin):
+class RegionModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)
 
 
 @admin.register(District)
-class DistrictModelAdmin(admin.ModelAdmin):
+class DistrictModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)
 
 
 @admin.register(PaymentType)
-class PaymentTypeModelAdmin(admin.ModelAdmin):
+class PaymentTypeModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)

@@ -1,18 +1,20 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
-from .models import (Book, CategoryForCourse, CompletedCourse, Course, Episode,
-                     EpisodeViewed, PurchasedBook, PurchasedCourse, Section, Certificate)
+from .models import (Book, CategoryForCourse, Certificate, CompletedCourse,
+                     Course, Episode, EpisodeViewed, PurchasedBook,
+                     PurchasedCourse, Section)
 
 
 @admin.register(CategoryForCourse)
-class CategoryForCourseModelAdmin(admin.ModelAdmin):
+class CategoryForCourseModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)
 
 
 @admin.register(Course)
-class CourseModelAdmin(admin.ModelAdmin):
+class CourseModelAdmin(TranslationAdmin):
     list_display = ("id", "title", "author_id", "category_id", "leval_id")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title", "author_id")
@@ -20,14 +22,14 @@ class CourseModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Section)
-class SectionModelAdmin(admin.ModelAdmin):
+class SectionModelAdmin(TranslationAdmin):
     list_display = ("id", "title", "section_type", "is_public")
     list_display_links = ("id", "title", "section_type")
     list_filter = ("section_type",)
 
 
 @admin.register(Episode)
-class EpisodeModelAdmin(admin.ModelAdmin):
+class EpisodeModelAdmin(TranslationAdmin):
     list_display = ("id", "title", "section_id")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("id", "title")
@@ -42,7 +44,7 @@ class EpisodeViewedModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Book)
-class BookModelAdmin(admin.ModelAdmin):
+class BookModelAdmin(TranslationAdmin):
     list_display = ("id", "title", "author_id", "leval_id", "total_pages")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title", "author_id")

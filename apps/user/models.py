@@ -4,6 +4,7 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -33,14 +34,14 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     """Foydalanuvchi uchun model"""
 
-    first_name = models.CharField("Ism", max_length=100)
-    last_name = models.CharField("Familiya", max_length=100)
-    phone_number = PhoneNumberField("Telefon nomer", max_length=32, unique=True)
-    email = models.EmailField("Elektron pochta", unique=True, blank=True, null=True)
+    first_name = models.CharField(_("Ism"), max_length=100)
+    last_name = models.CharField(_("Familiya"), max_length=100)
+    phone_number = PhoneNumberField(_("Telefon nomer"), max_length=32, unique=True)
+    email = models.EmailField(_("Elektron pochta"), unique=True, blank=True, null=True)
     avatar = models.ImageField(
-        "Sahifa uchun rasm", upload_to="user/user/avatar/", default="user/user/avatar/default-user.png"
+        _("Sahifa uchun rasm"), upload_to="user/user/avatar/", default="user/user/avatar/default-user.png"
     )
-    birthday = models.DateField("Tug`ilgan sanasi", null=True, blank=True)
+    birthday = models.DateField(_("Tug`ilgan sanasi"), null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -53,8 +54,8 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         return f"{self.first_name} {self.last_name}"
 
     class Meta:
-        verbose_name = "Foydalanuvchi"
-        verbose_name_plural = "Barcha foydalanuvchilar"
+        verbose_name = _("Foydalanuvchi")
+        verbose_name_plural = _("Barcha foydalanuvchilar")
 
     def tokens(self):
         refresh = RefreshToken.for_user(self)
@@ -65,14 +66,14 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
 class SavedItem(BaseModel):
     """Saqlab qo`yilgan narsalar uchun model"""
 
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Foydalanuvchi")
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name="Model")
-    object_id = models.PositiveIntegerField("Obyekt id")
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("Foydalanuvchi"))
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, verbose_name=_("Model"))
+    object_id = models.PositiveIntegerField(_("Obyekt id"))
     content_object = GenericForeignKey("content_type", "object_id")
 
     def __str__(self):
         return f"{self.user_id.first_name} {self.content_object}"
 
     class Meta:
-        verbose_name = "Saqlagan narsa"
-        verbose_name_plural = "Saqlagan narsalar"
+        verbose_name = _("Saqlagan narsa")
+        verbose_name_plural = _("Saqlagan narsalar")

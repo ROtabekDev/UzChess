@@ -1,10 +1,11 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Article, Views
 
 
 @admin.register(Article)
-class ArticleModelAdmin(admin.ModelAdmin):
+class ArticleModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = ("title",)

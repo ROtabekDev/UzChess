@@ -1,11 +1,12 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from .models import (FeatureName, Features, Product, ProductImages,
                      PurchasedProduct)
 
 
 @admin.register(Product)
-class ProductModelAdmin(admin.ModelAdmin):
+class ProductModelAdmin(TranslationAdmin):
     list_display = ("id", "title", "price", "available")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = (
@@ -22,7 +23,7 @@ class FeaturesModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(FeatureName)
-class FeatureNameModelAdmin(admin.ModelAdmin):
+class FeatureNameModelAdmin(TranslationAdmin):
     list_display = ("id", "title")
     prepopulated_fields = {"slug": ("title",)}
     list_display_links = (

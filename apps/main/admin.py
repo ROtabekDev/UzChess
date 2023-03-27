@@ -1,4 +1,5 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Author, Contact, Language, Leval, Reviews
 
@@ -16,7 +17,7 @@ class ContactModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Leval)
-class LevalModelAdmin(admin.ModelAdmin):
+class LevalModelAdmin(TranslationAdmin):
     list_display = ("id", "name")
     prepopulated_fields = {"slug": ("name",)}
     list_display_links = (
@@ -26,13 +27,13 @@ class LevalModelAdmin(admin.ModelAdmin):
 
 
 @admin.register(Author)
-class AuthorModelAdmin(admin.ModelAdmin):
+class AuthorModelAdmin(TranslationAdmin):
     list_display = ("id", "first_name", "last_name")
     list_display_links = ("first_name", "last_name")
 
 
 @admin.register(Language)
-class LanguageModelAdmin(admin.ModelAdmin):
+class LanguageModelAdmin(TranslationAdmin):
     list_display = ("id", "name")
     prepopulated_fields = {"slug": ("name",)}
     list_display_links = (
