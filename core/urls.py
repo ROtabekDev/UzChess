@@ -29,13 +29,21 @@ urlpatterns = [
     # swagger
     path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
-] + i18n_patterns(
-    path("i18n/", include("django.conf.urls.i18n")),
-    # apps
+    #apps
     path("api/cart/", include("apps.cart.urls")),
     path("api/education/", include("apps.education.urls")),
     path("api/main/", include("apps.main.urls")),
     path("api/product/", include("apps.product.urls")),
     path("api/user/", include("apps.user.urls")),
     path("api/news/", include("apps.news.urls")),
-)
+]
+# ] + i18n_patterns(
+#     path("i18n/", include("django.conf.urls.i18n")),
+#     # apps
+#     path("api/cart/", include("apps.cart.urls")),
+#     path("api/education/", include("apps.education.urls")),
+#     path("api/main/", include("apps.main.urls")),
+#     path("api/product/", include("apps.product.urls")),
+#     path("api/user/", include("apps.user.urls")),
+#     path("api/news/", include("apps.news.urls")),
+# )
